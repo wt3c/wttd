@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'test_without_migrations',
     # APPs
     'eventex.nucleo',
-    'eventex.subscriptions',
+    'eventex.subscriptions.apps.SubscriptionsConfig',
 ]
 
 MIDDLEWARE = [
