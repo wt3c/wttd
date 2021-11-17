@@ -1,7 +1,10 @@
-from django.test import TestCase
 """First tests"""
+from django.test import TestCase
+
+
 class HomeTest(TestCase):
     """Home Tests"""
+
     def setUp(self):
         self.response = self.client.get('/')
 
