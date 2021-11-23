@@ -3,6 +3,7 @@ from django.core import mail
 from django.test import TestCase
 
 from eventex.subscriptions.forms import SubscriptionForm
+from eventex.subscriptions.models import Subscription
 
 
 class SubcribeGet(TestCase):
@@ -39,7 +40,21 @@ class SubcribeGet(TestCase):
         self.assertIsInstance(self.form, SubscriptionForm)
 
 
+class SubscribePostValid(TestCase):
+    def setUp(self):
+        data = dict(name='Welington Carlos', cpf='123456789101', email='carlos@gmail.com', phone='2198985-6652')
+        self.resp = self.client.post('/inscricao/', data)
+        self.email = mail.outbox[0]
 
+    def test_post(self):
+        """Valid POST should redirect to /inscicao"""
+        self.assertEqual(302, self.resp.status_code)
+
+    def test_send_subscribe_email(self):
+        self.assertEqual(1, len(mail.outbox))
+
+    def test_save_subscription(self):
+        self.assertTrue(Subscription.objects.exists())
 
 class SubscribeInvalid(TestCase):
     def setUp(self):
@@ -60,6 +75,8 @@ class SubscribeInvalid(TestCase):
         form = self.resp.context['form']
         self.assertTrue(form.errors)
 
+    def test_dont_save_subscription(self):
+        self.assertFalse(Subscription.objects.exists())
 
 class SubscribeSuccessMessage(TestCase):
     def test_message(self):
