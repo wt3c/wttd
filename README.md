@@ -16,7 +16,7 @@ Sistema de Eventos encomendado pela Morena.
     git clone git@github.com:wt3c/wttd.git
     mkvirtual -p /opt/pyenv/versions/3.9.9/bin/python wttd
     workon wttd
-    pip install -r requiements.txt
+    pip install -r requiements-dev.txt
     cp contrib/env-sample .env
     python manage.py test
 ```
@@ -36,6 +36,6 @@ heroku config:push
 heroku config:set SECRET_KEY = `python contrib/secret_gen.py` -- https://gist.github.com/henriquebastos/11cf99c1bbc70bacf73a
 heroku config:set DEBUG=False
 # Configuro email
-git push heroku master --force 
+git push heroku master --force
 ```
 teste branch
