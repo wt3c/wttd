@@ -7,3 +7,4 @@ python-decouple==3.5
 pytz==2021.3
 django-extensions
 static3==0.7.0
+django-test-without-migrations
