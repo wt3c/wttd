@@ -19,4 +19,6 @@ class SubscriptionModelTest(TestCase):
         """Subscription must have an auto created_at attr"""
         self.assertIsInstance(self.obj.created_at, datetime)
 
-
+    def test_paid_default_to_false(self):
+        """By default paid must be False. """
+        self.assertEqual(False, self.obj.paid)
