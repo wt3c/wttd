@@ -20,10 +20,19 @@ class Speaker(models.Model):
         return r('speaker_detail', slug=self.slug)
 
 
-"""
-name = 'Grace Hopper'
-    website = 'http://hbn.link/hopper-site'
-    photo = 'http://hbn.link/hopper-pic'
-    description = 'Programadora e almirante'
-"""
-#
+class Contact(models.Model):
+    EMAIL = 'E'
+    PHONE = 'P'
+    KINDS = (
+        (EMAIL, 'Email'),
+        (PHONE, 'Telefone')
+    )
+    speaker = models.ForeignKey('Speaker', on_delete=models.CASCADE, verbose_name='palestrante')
+    kind = models.CharField('Tipo', max_length=1, choices=KINDS)
+    value = models.CharField('Valor', max_length=50)
+
+    class Meta:
+        verbose_name = 'contato'
+        verbose_name_plural = 'contatos'
+    def __str__(self):
+        return self.value
