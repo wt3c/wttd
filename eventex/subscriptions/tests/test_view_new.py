@@ -42,7 +42,7 @@ class SubcribeNew(TestCase):
 
 class SubcribeNewGetPost(TestCase):
     def setUp(self):
-        data = dict(name='Welington Carlos', cpf='123456789101', email='carlos@gmail.com', phone='2198985-6652')
+        data = dict(name='Welington Carlos', cpf='12345678901', email='carlos@gmail.com', phone='2198985-6652')
         self.resp = self.client.post(r('subscriptions:new'), data)
         self.email = mail.outbox[0]
 

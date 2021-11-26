@@ -2,13 +2,11 @@ from django.core import mail
 from django.test import TestCase
 from django.shortcuts import resolve_url as r
 
-from eventex.subscriptions.forms import SubscriptionForm
-
-
-class SubscribeEmailt(TestCase):
+class SubscribeEmail(TestCase):
     def setUp(self):
-        data = dict(name='Welington Carlos', cpf='123456789101', email='carlos@gmail.com', phone='2198985-6652')
+        data = dict(name='Welington Carlos', cpf='12345678901', email='carlos@gmail.com', phone='2198985-6652')
         self.resp = self.client.post(r('subscriptions:new'), data)
+        # print(mail.outbox[0])
         self.email = mail.outbox[0]
 
     def test_post(self):
@@ -29,7 +27,7 @@ class SubscribeEmailt(TestCase):
     def test_suscription_email_body(self):
         contents = [
             'Welington Carlos',
-            '123456789101',
+            '12345678901',
             'carlos@gmail.com',
             '2198985-6652',
         ]
