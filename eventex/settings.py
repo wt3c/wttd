@@ -134,26 +134,26 @@ EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
 # Loging SQLFORMATTER
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'sqlhandler': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
-            'formatter': 'sqlformatter'
-        }
-    },
-    'formatters': {
-        'sqlformatter': {
-            '()': 'sqlformatter.SqlFormatter',
-            'format': '%(levelname)s %(message)s',
-        },
-    },
-    'loggers': {
-        'django.db.backends': {
-            'handlers': ['sqlhandler'],
-            'level': 'DEBUG',
-        },
-    }
-}
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'handlers': {
+#         'sqlhandler': {
+#             'level': 'DEBUG',
+#             'class': 'logging.StreamHandler',
+#             'formatter': 'sqlformatter'
+#         }
+#     },
+#     'formatters': {
+#         'sqlformatter': {
+#             '()': 'sqlformatter.SqlFormatter',
+#             'format': '%(levelname)s %(message)s',
+#         },
+#     },
+#     'loggers': {
+#         'django.db.backends': {
+#             'handlers': ['sqlhandler'],
+#             'level': 'DEBUG',
+#         },
+#     }
+# }
