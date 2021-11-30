@@ -1,7 +1,7 @@
 from django.test import TestCase
 
 from eventex.nucleo.managers import PeriodManager
-from eventex.nucleo.models import Talk
+from eventex.nucleo.models import Talk, Course
 
 
 class TalkModelTest(TestCase):
@@ -31,6 +31,7 @@ class TalkModelTest(TestCase):
                 expected = Talk._meta.get_field('{}'.format(field))
                 self.assertTrue(expected.blank)
 
+
 class PeriodManagerTest(TestCase):
     def setUp(self):
         Talk.objects.create(title='Morning Talk', start='11:59')
@@ -48,3 +49,28 @@ class PeriodManagerTest(TestCase):
         qs = Talk.objects.at_afternoon()
         expected = ['Afternoon Talk']
         self.assertQuerysetEqual(qs, expected, lambda o: o.title)
+
+
+class CourseModelTest(TestCase):
+    def setUp(self):
+        self.course = Course.objects.create(
+            title='Título do Curso',
+            start='09:00',
+            description='Descrição do curso.',
+            slots=20
+        )
+
+    def test_create(self):
+        self.assertTrue(Course.objects.exists())
+
+    def test_speaker(self):
+        """Course has many speakers and vice-versa"""
+        self.course.speakers.create(
+            name='Henrique Bastos',
+            slug='henrique-bastos',
+            website='http://henriquebastos.net'
+        )
+        self.assertEqual(1, self.course.speakers.count())
+
+    def test_manager(self):
+        self.assertIsInstance(Course.objects, PeriodManager)
